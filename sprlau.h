@@ -643,11 +643,11 @@ int JudgeHamilton(int n, int origin, int now, int index[]) {
 LLI Square(LLI number) {
     return number * number;
 }
-int count = 0;
+int countFP = 0;
 LLI FastPower(LLI base, LLI power) {
-    printf("%d\n", count);
+    printf("%d\n", countFP);
 
-    count++;
+    countFP++;
     if (power == 1)
         return base;
     else
@@ -801,4 +801,27 @@ void CodeTrans() {
     }
     }
     puts(code);
+}
+
+void leastSquareLinearFit(double x[], double y[], const int num, double *a, double *b) {
+    double sum_x2 = 0.0;
+    double sum_y  = 0.0;
+    double sum_x  = 0.0;
+    double sum_xy = 0.0;
+
+    try {
+        for (int i = 0; i < num; ++i) {
+            sum_x2 += x[i]*x[i];
+            sum_y  += y[i];
+            sum_x  += x[i];
+            sum_xy += x[i]*y[i];
+        }
+    } catch (...) {
+        return;
+    }
+
+    *a = (num*sum_xy - sum_x*sum_y)/(num*sum_x2 - sum_x*sum_x);
+    *b = (sum_x2*sum_y - sum_x*sum_xy)/(num*sum_x2-sum_x*sum_x);
+
+    return;
 }
